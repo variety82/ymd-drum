@@ -165,28 +165,32 @@ def display_image_5(image_num):
     data = data.drop(columns = ['구멍끼 영역 비율(%)'])
     if st.session_state.image == '1':
         sliced_df = data.iloc[0:1, 1:].reset_index(drop=True)
-        st.dataframe(sliced_df)
 
     elif st.session_state.image == '2':
         sliced_df = data.iloc[1:2, 1:]
-        st.dataframe(sliced_df)
 
     elif st.session_state.image == '3':
         sliced_df = data.iloc[2:3, 1:]
-        st.dataframe(sliced_df)
 
     elif st.session_state.image == '4':
         sliced_df = data.iloc[3:4, 1:]
-        st.dataframe(sliced_df)
 
     elif st.session_state.image == '5':
         sliced_df = data.iloc[4:5, 1:]
-        st.dataframe(sliced_df)
 
     elif st.session_state.image == '6':
         sliced_df = data.iloc[5:6, 1:]
-        st.dataframe(sliced_df)
-
+    html_table = sliced_df.to_html(index=False, escape=False)
+    st.markdown(
+            f"""
+            <div style="display: flex; justify-content: center; align-items: center;">
+                {html_table}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    img = Image.open(f'image/tree.png')
+    st.image(img)
 st.title("마른 김 등급 판별")
 
 if "current_step" not in st.session_state:
