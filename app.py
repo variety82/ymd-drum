@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import os
 from PIL import Image
-from streamlit_elements import elements, dashboard, mui, editor, media, lazy, sync, nivo
-
-
-
 
 def display_image_2(image_num):
     col1, col2, col3 = st.columns(3)
