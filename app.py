@@ -162,6 +162,7 @@ def display_image_4(image_num):
 def display_image_5(image_num):
     data = pd.read_csv('./image/data_sample.csv')
     data = data.drop(columns = ['색도 b'])
+    data = data.drop(columns = ['구멍끼 영역 비율(%)'])
     if st.session_state.image == '1':
         sliced_df = data.iloc[0:1, 1:].reset_index(drop=True)
         st.dataframe(sliced_df)
