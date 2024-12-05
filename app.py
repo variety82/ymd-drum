@@ -1,54 +1,51 @@
 import streamlit as st
+import pandas as pd
+import os
+from PIL import Image
+from datetime import datetime
 
-st.title("YMD DRUM")
+st.title("마른 김 등급 판별")
 
-tab1, tab2, tab3, tab4 = st.tabs(['학원소개', '강사소개', '오시는 길','Q&A'])
+st.sidebar.title('AI 모델')
 
-with tab1:
-    st.header('학원소개')
-    st.write('수원에 위치한 연무동에 최초로! 드럼 연습실, 레슨실이 생겼어요!  :)') 
-    st.write('시원하게 드럼 연주하면서 쌓여왔던 모든 스트레스 날려버리시는 건 어떠신가요?!')
+select_species = st.sidebar.selectbox(
+    '확인하고 싶은 단계를 선택하세요',
+    ['메인', '불순물','구멍끼','색택, NIR(단백질)', '등급']
+)
 
+if select_species == '메인':
+    tab1, tab2, tab3 = st.tabs(["이미지 업로드", "상관관계", "PCA"])
 
-    st.image('https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230120_21%2F1674194484479jhv8d_JPEG%2FYMD_%25C7%25C1%25B7%25CE%25C7%25CA_%25BB%25E7%25C1%25F8.JPG')
-    st.image('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA5MDhfMjg3%2FMDAxNjk0MTg0MDMzNDY0.NiC51om_tJ9ooHPjj0MvJjufsk8S2WFaR0UOGLVBOCwg.fm15esEIl3EO8FPeaWyzzH32jRrzICSiYmQ-2dVxbZEg.JPEG.1717hdh%2FIMG_4278.JPG&type=sc960_832', width = 700)
-    st.image('https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA5MDFfNTIg%2FMDAxNjkzNTU3NDgyODc2.cU5oUGUtBPAZrux1TrUtR12y1ogD-53uSDJTSu5Xv08g.EftFShIePTRazk9FIS6M8w5EiqcYGPGZ1080EMicoT4g.JPEG%2Fimage.jpg')
-    st.image('https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA4MTdfMTY3%2FMDAxNjkyMjU2MjM1Mjkx.7pzEn2Qv9p0mYg7nb-vXT0Trcjcg46zEt_V_Xw0ngiQg.NOFm87PCqpX3Qg4Pbh9q-NmmtI8AixyKXphKE9bq4KEg.JPEG%2F55FF37A9-FCCD-4BB7-9DB7-E4F09A96462F.jpeg')
-with tab2:
-    st.header('Tab2')
+    with tab1:
+        st.subheader('이미지 업로드')
+        img_file = st.file_uploader('',type=['png', 'jpg', 'jpeg'])
 
-with tab3:
-    st.header('오시는 길')
-    st.image('https://map.naver.com/p/entry/place/1868778975?c=15.00,0,0,0,dh')
+        if img_file is not None:
 
-with tab4:
-    st.header('tab4')
+            # 이미지명이 고유하도록 시간을 활용하여 변경
+            current_time = datetime.now()
+            filename = current_time.isoformat().replace(":", "_")
+            img_file.name = filename + '.jpg'
 
-footer="""<style>
-a:link , a:visited{
-color: blue;
-background-color: transparent;
-text-decoration: underline;
-}
+            # 실제로 저장
+            if not os.path.exists('image'):
+                os.makedirs('image')
+                
+            with open(os.path.join('image', img_file.name), 'wb') as f:
+                f.write(img_file.getbuffer())
 
-a:hover,  a:active {
-color: red;
-background-color: transparent;
-text-decoration: underline;
-}
+            # 경로로 이미지 출력
+            st.subheader('김 이미지')
+            img = Image.open('image/'+img_file.name)
+            st.image(img)
 
-.footer {
-position: fixed;
-left: 0;
-bottom: 0;
-width: 100%;
-background-color: white;
-color: black;
-text-align: center;
-}
-</style>
-<div class="footer">
-<p>전화 0507-1357-9664 <a style='display: block; text-align: center;' href="https://blog.naver.com/ymd_drum" target="_blank">Blog</a></p>
-</div>
-"""
-st.markdown(footer,unsafe_allow_html=True)
+            st.success('파일 업로드 성공')
+
+    with tab2:
+        st.markdown(f'ss')
+
+# col1, col2 = st.columns(2)
+
+# with col1:
+#    st.header("김 이미지 업로드")
+
