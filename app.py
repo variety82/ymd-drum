@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from PIL import Image
 
+
 def display_image_2(image_num):
     col1, col2, col3 = st.columns(3)
     print(st.session_state.image)
@@ -85,53 +86,84 @@ def display_image_4(image_num):
     print(st.session_state.image)
     if st.session_state.image == image_num:
         with col1:
-            img = Image.open(f'image/{image_num}-1_origin.png')
-            st.image(img)
-            st.markdown(
-            "<h3 style='text-align: center;'>Input</h3>",
-            unsafe_allow_html=True
-            )
-        with col2:
-            img = Image.open(f'image/arr.png')
-            st.image(img)
-        with col3:
             img = Image.open(f'image/{image_num}-4_nir.png')
             st.image(img)
             if st.session_state.image == '1':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C1), 색택(G1)</h4>",   
+                "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'><br><br> Input : 1.3(색도b) </h4>",   
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '2':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C3), 색택(G1)</h4>",
+                 "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'><br><br> Input : 1.6(색도b) </h4>",
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '3':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C2), 색택(G3)</h4>",
+                 "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'><br><br> Input : 6.1(색도b) </h4>",
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '4':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C0), 색택(G3)</h4>",
+                 "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'><br><br> Input : 5.6(색도b) </h4>",
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '5':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C4), 색택(G2)</h4>",
+                 "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'><br><br> Input : 4.1(색도b) </h4>",
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '6':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output :<br> NIR(C4), 색택(G1)</h4>",
+                 "<h4 style='text-align: center;'>Input" "<h4 style='text-align: center;'>Input : 1.2(색도b) </h4>",
                 unsafe_allow_html=True
                 )
-
+        with col2:
+            img = Image.open(f'image/arr.png')
+            st.image(img)
+            st.markdown(
+                 "<h2 style='text-align: center;'>색택" ,
+                unsafe_allow_html=True
+                )
+        with col3:
+            img = Image.open(f'image/{st.session_state.image}-5.png')
+            st.image(img)
+            if st.session_state.image == '1':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C1)" "<h4 style='text-align: center;'><br><br> Output : G1",   
+                unsafe_allow_html=True
+                )
+            elif st.session_state.image == '2':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C3)" "<h4 style='text-align: center;'><br><br> Output : G1",  
+                unsafe_allow_html=True
+                )
+            elif st.session_state.image == '3':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C2)" "<h4 style='text-align: center;'><br><br> Output : G3",  
+                unsafe_allow_html=True
+                )
+            elif st.session_state.image == '4':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C0)" "<h4 style='text-align: center;'><br><br> Output : G3",  
+                unsafe_allow_html=True
+                )
+            elif st.session_state.image == '5':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C4)" "<h4 style='text-align: center;'><br><br> Output : G2",  
+                unsafe_allow_html=True
+                )
+            elif st.session_state.image == '6':
+                st.markdown(
+                "<h4 style='text-align: center;'>Output : NIR(C4)" "<h4 style='text-align: center;'><br><br> Output : G1",  
+                unsafe_allow_html=True
+                )
+            
 def display_image_5(image_num):
     data = pd.read_csv('./image/data_sample.csv')
+    data = data.drop(columns = ['색도 b'])
     if st.session_state.image == '1':
-        sliced_df = data.iloc[0:1, 1:]
+        sliced_df = data.iloc[0:1, 1:].reset_index(drop=True)
         st.dataframe(sliced_df)
 
     elif st.session_state.image == '2':
