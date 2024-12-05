@@ -130,32 +130,32 @@ def display_image_4(image_num):
             st.image(img)
             if st.session_state.image == '1':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C1)" "<h4 style='text-align: center;'><br><br> Output : G1",   
+                "<h4 style='text-align: center;'>Output : C1" "<h4 style='text-align: center;'><br><br> Output : G1",   
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '2':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C3)" "<h4 style='text-align: center;'><br><br> Output : G1",  
+                "<h4 style='text-align: center;'>Output : C3" "<h4 style='text-align: center;'><br><br> Output : G1",  
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '3':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C2)" "<h4 style='text-align: center;'><br><br> Output : G3",  
+                "<h4 style='text-align: center;'>Output : C2" "<h4 style='text-align: center;'><br><br> Output : G3",  
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '4':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C0)" "<h4 style='text-align: center;'><br><br> Output : G3",  
+                "<h4 style='text-align: center;'>Output : C0" "<h4 style='text-align: center;'><br><br> Output : G3",  
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '5':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C4)" "<h4 style='text-align: center;'><br><br> Output : G2",  
+                "<h4 style='text-align: center;'>Output : C4" "<h4 style='text-align: center;'><br><br> Output : G2",  
                 unsafe_allow_html=True
                 )
             elif st.session_state.image == '6':
                 st.markdown(
-                "<h4 style='text-align: center;'>Output : NIR(C4)" "<h4 style='text-align: center;'><br><br> Output : G1",  
+                "<h4 style='text-align: center;'>Output : C4" "<h4 style='text-align: center;'><br><br> Output : G1",  
                 unsafe_allow_html=True
                 )
             
